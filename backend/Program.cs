@@ -9,13 +9,37 @@ using backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<AppDbContext>(opt =>
-    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection") ?? "Data Source=mini-pm.db"));
+// Configure database based on connection string
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? "Data Source=mini-pm.db";
+if (connectionString.Contains("Host=") || connectionString.Contains("Server="))
+{
+    // PostgreSQL connection
+    builder.Services.AddDbContext<AppDbContext>(opt =>
+        opt.UseNpgsql(connectionString));
+}
+else
+{
+    // SQLite connection
+    builder.Services.AddDbContext<AppDbContext>(opt =>
+        opt.UseSqlite(connectionString));
+}
 
 builder.Services.AddScoped<SmartSchedulerService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddCors();
+// Configure CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+        policy.WithOrigins(
+                "http://localhost:3000", // Development
+                "https://your-frontend-url.vercel.app", // Vercel
+                "https://your-frontend-url.netlify.app"  // Netlify
+              )
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials());
+});
 var jwtKey = builder.Configuration["Jwt:Key"] ?? "change_this_super_secret_key";
 var jwtIssuer = builder.Configuration["Jwt:Issuer"] ?? "mini-pm";
 builder.Services.AddAuthentication(options => {
@@ -33,18 +57,22 @@ builder.Services.AddAuthentication(options => {
 });
 builder.Services.AddAuthorization();
 var app = builder.Build();
-app.UseSwagger(); app.UseSwaggerUI();
-// Configure CORS based on environment
-if (app.Environment.IsDevelopment())
+
+// Auto-apply EF migrations at startup
+using (var scope = app.Services.CreateScope())
 {
-    app.UseCors(p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
 }
-else
-{
-    var allowedOrigins = app.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? new[] { "*" };
-    app.UseCors(p => p.WithOrigins(allowedOrigins).AllowAnyHeader().AllowAnyMethod());
-}
-app.UseAuthentication(); app.UseAuthorization();
+
+app.UseSwagger(); 
+app.UseSwaggerUI();
+
+// Configure CORS
+app.UseCors("AllowFrontend");
+
+app.UseAuthentication(); 
+app.UseAuthorization();
 
 app.MapPost("/api/auth/register", async (AppDbContext db, UserRegisterDto dto) => {
     if (await db.Users.AnyAsync(u => u.Email == dto.Email)) return Results.BadRequest(new { error = "Email exists" });
