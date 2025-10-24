@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: mini-pm-backend
+    env: dotnet
+    plan: free
+    buildCommand: cd backend && dotnet publish -c Release -o ./publish
+    startCommand: cd backend && dotnet ./publish/backend.dll
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRY_DAYS
+        value: 7
+      - key: CONNECTION_STRING
+        value: Data Source=data.db

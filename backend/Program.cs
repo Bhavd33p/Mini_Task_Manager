@@ -34,7 +34,16 @@ builder.Services.AddAuthentication(options => {
 builder.Services.AddAuthorization();
 var app = builder.Build();
 app.UseSwagger(); app.UseSwaggerUI();
-app.UseCors(p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+// Configure CORS based on environment
+if (app.Environment.IsDevelopment())
+{
+    app.UseCors(p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+}
+else
+{
+    var allowedOrigins = app.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? new[] { "*" };
+    app.UseCors(p => p.WithOrigins(allowedOrigins).AllowAnyHeader().AllowAnyMethod());
+}
 app.UseAuthentication(); app.UseAuthorization();
 
 app.MapPost("/api/auth/register", async (AppDbContext db, UserRegisterDto dto) => {

@@ -5,6 +5,7 @@ This guide covers different deployment options for the Mini Project Manager appl
 ## 📋 Prerequisites
 
 - **Docker** and **Docker Compose** installed
+- **.NET 8 SDK** (for local development)
 - **Git** for version control
 - **Domain name** (optional, for production)
 - **SSL certificate** (for HTTPS in production)

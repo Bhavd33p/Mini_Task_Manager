@@ -1,243 +1,270 @@
 # 🚀 Mini Project Manager
 
-A modern, full-stack project management application with intelligent task scheduling capabilities. Built with ASP.NET Core Web API backend and React TypeScript frontend.
+A full-stack project management application built with **.NET 8** backend and **React** frontend, featuring AI-powered Smart Scheduler, user authentication, and modern black & white UI.
+
+![.NET](https://img.shields.io/badge/.NET-8.0-purple)
+![React](https://img.shields.io/badge/React-18.2.0-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-4.9.5-blue)
+![SQLite](https://img.shields.io/badge/SQLite-3.0-lightblue)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 ## ✨ Features
 
-### 🔐 Authentication & User Management
-- **Secure JWT Authentication** - Token-based authentication with secure password hashing
-- **User Registration & Login** - Complete user management system
-- **Protected Routes** - Secure access to authenticated features
+### 🔐 **Authentication & Security**
+- User registration and login
+- JWT token-based authentication
+- Password hashing with BCrypt
+- Protected routes and API endpoints
 
-### 📋 Project Management
-- **Create & Manage Projects** - Organize your work into projects
-- **Project Details** - View project information and associated tasks
-- **Delete Projects** - Remove projects when no longer needed
+### 📋 **Project Management**
+- Create, edit, and delete projects
+- Project ownership and permissions
+- Project descriptions and metadata
+- Real-time project updates
 
-### ✅ Task Management
-- **Create Tasks** - Add tasks to projects with titles and due dates
-- **Mark Complete** - Toggle task completion status
-- **Delete Tasks** - Remove tasks from projects
-- **Due Date Tracking** - Visual indicators for overdue tasks
+### ✅ **Task Management**
+- Create and manage tasks within projects
+- Mark tasks as complete/incomplete
+- Task due dates and descriptions
+- Task dependencies and relationships
 
-### 🧠 Smart Scheduler (AI-Powered)
-- **Dependency Management** - Define task dependencies and estimated hours
-- **Topological Sorting** - Automatically calculates optimal task execution order
-- **Workflow Optimization** - Minimizes project completion time
-- **Visual Task Flow** - Clear step-by-step execution plan
+### 🧠 **Smart Scheduler (AI-Powered)**
+- AI-powered task scheduling algorithm
+- Dependency resolution using topological sorting
+- Optimal timeline generation
+- Resource allocation optimization
+- Conflict detection and resolution
 
-### 🎨 Modern UI/UX
-- **Black & White Theme** - Clean, professional monochrome design
-- **Responsive Design** - Works perfectly on desktop, tablet, and mobile
-- **Glass Morphism Effects** - Modern UI with backdrop blur effects
-- **Smooth Animations** - Engaging micro-interactions and transitions
-- **Loading States** - Beautiful loading spinners and feedback
-- **Accessibility** - WCAG compliant with proper focus management
+### 🎨 **Modern UI/UX**
+- Responsive black & white theme
+- Mobile-friendly design
+- Loading indicators and user feedback
+- Intuitive navigation and interactions
 
-## 🏗️ Architecture
+## 🏗️ **Architecture**
 
-### Backend (ASP.NET Core Web API)
-```
-backend/
-├── Controllers/          # API Controllers
-├── Models/              # Entity Framework Models
-├── DTOs/                # Data Transfer Objects
-├── Services/            # Business Logic Services
-├── Helpers/             # Utility Classes
-└── Program.cs           # Application Entry Point
-```
+### **Backend (.NET 8)**
+- **Framework**: ASP.NET Core Web API
+- **Database**: SQLite with Entity Framework Core
+- **Authentication**: JWT Bearer tokens
+- **API**: RESTful endpoints with Swagger documentation
+- **Algorithm**: Topological sorting for Smart Scheduler
 
-**Key Technologies:**
-- **.NET 7** - Modern C# framework
-- **Entity Framework Core** - ORM for database operations
-- **SQLite** - Lightweight database
-- **JWT Authentication** - Secure token-based auth
-- **BCrypt** - Password hashing
-- **Topological Sorting** - Smart scheduling algorithm
+### **Frontend (React)**
+- **Framework**: React 18 with TypeScript
+- **State Management**: Context API
+- **HTTP Client**: Axios
+- **Routing**: React Router
+- **Styling**: Custom CSS with responsive design
 
-### Frontend (React TypeScript)
-```
-frontend/
-├── src/
-│   ├── components/      # React Components
-│   ├── contexts/        # React Context (Auth)
-│   ├── services/        # API Service Layer
-│   ├── types/           # TypeScript Interfaces
-│   └── App.tsx          # Main Application
-└── public/              # Static Assets
-```
+## 🚀 **Quick Start**
 
-**Key Technologies:**
-- **React 18** - Modern React with hooks
-- **TypeScript** - Type-safe JavaScript
-- **React Router** - Client-side routing
-- **Axios** - HTTP client for API calls
-- **Context API** - State management
-- **Custom CSS** - Modern styling with animations
+### **Prerequisites**
+- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+- [Node.js 18+](https://nodejs.org/)
+- [Git](https://git-scm.com/)
 
-## 🚀 Quick Start
-
-### Prerequisites
-- **.NET 7 SDK** - [Download here](https://dotnet.microsoft.com/download/dotnet/7.0)
-- **Node.js 16+** - [Download here](https://nodejs.org/)
-- **npm** - Comes with Node.js
-
-### Installation
+### **Local Development**
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/yourusername/mini-pm.git
    cd mini-pm
    ```
 
-2. **Backend Setup**
+2. **Start Backend**
    ```bash
-   cd backend
-   dotnet restore
-   dotnet run
+   # Use the startup script (recommended)
+   ./start-backend-dotnet8.sh
+   
+   # Or manually
+   export PATH="/opt/homebrew/opt/dotnet@8/bin:$PATH"
+   export DOTNET_ROOT="/opt/homebrew/opt/dotnet@8/libexec"
+   cd backend && dotnet run
    ```
-   Backend will be available at: `http://localhost:5127`
 
-3. **Frontend Setup**
+3. **Start Frontend**
    ```bash
    cd frontend
    npm install
    npm start
    ```
-   Frontend will be available at: `http://localhost:3000`
 
-### Using the Application
+4. **Access the Application**
+   - **Frontend**: http://localhost:3000
+   - **Backend API**: http://localhost:5127
+   - **API Documentation**: http://localhost:5127/swagger
 
-1. **Register** a new account or **Login** with existing credentials
-2. **Create Projects** to organize your work
-3. **Add Tasks** to projects with due dates
-4. **Use Smart Scheduler** to optimize task execution order
-5. **Track Progress** by marking tasks as complete
+## 📚 **API Documentation**
 
-## 🔧 API Endpoints
-
-### Authentication
+### **Authentication Endpoints**
 - `POST /api/v1/auth/register` - User registration
 - `POST /api/v1/auth/login` - User login
 
-### Projects
+### **Project Endpoints**
 - `GET /api/v1/projects` - Get user's projects
 - `POST /api/v1/projects` - Create new project
 - `GET /api/v1/projects/{id}` - Get project details
+- `PUT /api/v1/projects/{id}` - Update project
 - `DELETE /api/v1/projects/{id}` - Delete project
 
-### Tasks
-- `POST /api/v1/projects/{projectId}/tasks` - Create task
+### **Task Endpoints**
+- `GET /api/v1/projects/{id}/tasks` - Get project tasks
+- `POST /api/v1/projects/{id}/tasks` - Create new task
 - `PUT /api/v1/tasks/{id}` - Update task
 - `DELETE /api/v1/tasks/{id}` - Delete task
 
-### Smart Scheduler
-- `POST /api/v1/projects/{projectId}/schedule` - Generate optimized schedule
+### **Smart Scheduler Endpoint**
+- `POST /api/v1/projects/{id}/schedule` - Generate optimal schedule
 
-## 🧠 Smart Scheduler Algorithm
+## 🌐 **Deployment**
 
-The Smart Scheduler uses **Topological Sorting (Kahn's Algorithm)** to:
+### **Backend Deployment**
 
-1. **Analyze Dependencies** - Maps task relationships
-2. **Calculate Critical Path** - Identifies longest dependency chain
-3. **Optimize Order** - Minimizes total project completion time
-4. **Handle Cycles** - Detects and reports circular dependencies
-5. **Generate Schedule** - Provides step-by-step execution plan
+#### **Option 1: Render**
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
 
-### Example Usage
-```json
-{
-  "tasks": [
-    {
-      "title": "Design Database",
-      "estimatedHours": 4,
-      "dependencies": []
-    },
-    {
-      "title": "Create API",
-      "estimatedHours": 8,
-      "dependencies": ["Design Database"]
-    },
-    {
-      "title": "Build Frontend",
-      "estimatedHours": 12,
-      "dependencies": ["Create API"]
-    }
-  ]
-}
-```
+1. Connect your GitHub repository to Render
+2. Select "Web Service"
+3. Use the following settings:
+   - **Build Command**: `cd backend && dotnet publish -c Release -o ./publish`
+   - **Start Command**: `cd backend && dotnet ./publish/backend.dll`
+   - **Environment**: `DOTNET_VERSION=8.0`
 
-## 🎨 UI/UX Features
+#### **Option 2: Railway**
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/your-template)
 
-### Design System
-- **Monochrome Palette** - Black, white, and gray tones
-- **Typography** - System fonts with proper hierarchy
-- **Spacing** - Consistent 8px grid system
-- **Shadows** - Subtle depth and elevation
-- **Borders** - Clean, minimal borders
+1. Connect your GitHub repository to Railway
+2. Railway will auto-detect the .NET project
+3. Set environment variables in Railway dashboard
 
-### Responsive Breakpoints
-- **Mobile**: < 640px
-- **Tablet**: 640px - 1024px
-- **Desktop**: > 1024px
+### **Frontend Deployment**
 
-### Interactive Elements
-- **Hover Effects** - Smooth color transitions
-- **Focus States** - Accessibility-compliant focus indicators
-- **Loading States** - Spinner animations
-- **Form Validation** - Real-time error feedback
+#### **Option 1: Vercel**
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone)
 
-## 🔒 Security Features
+1. Connect your GitHub repository to Vercel
+2. Set build settings:
+   - **Framework Preset**: Create React App
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `build`
 
-- **JWT Tokens** - Secure authentication
-- **Password Hashing** - BCrypt encryption
-- **CORS Configuration** - Cross-origin request handling
-- **Input Validation** - Server-side validation
-- **SQL Injection Protection** - Entity Framework parameterized queries
+#### **Option 2: Netlify**
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy)
 
-## 📱 Browser Support
+1. Connect your GitHub repository to Netlify
+2. Set build settings:
+   - **Build Command**: `npm run build`
+   - **Publish Directory**: `build`
 
-- **Chrome** 90+
-- **Firefox** 88+
-- **Safari** 14+
-- **Edge** 90+
+## 🔧 **Environment Variables**
 
-## 🚀 Deployment
-
-### Backend Deployment
-1. **Build the application**
-   ```bash
-   dotnet publish -c Release -o ./publish
-   ```
-
-2. **Deploy to server**
-   - Copy publish folder to server
-   - Install .NET 7 Runtime
-   - Configure environment variables
-   - Run with `dotnet backend.dll`
-
-### Frontend Deployment
-1. **Build for production**
-   ```bash
-   npm run build
-   ```
-
-2. **Deploy to static hosting**
-   - Copy build folder to web server
-   - Configure API endpoint
-   - Set up HTTPS
-
-### Environment Variables
-```bash
-# Backend
-JWT_SECRET=your-secret-key
+### **Backend (.env)**
+```env
+JWT_SECRET=your-super-secret-jwt-key-here
+JWT_EXPIRY_DAYS=7
+CONNECTION_STRING=Data Source=data.db
 ASPNETCORE_ENVIRONMENT=Production
-
-# Frontend
-REACT_APP_API_URL=https://your-api-domain.com
 ```
 
-## 🤝 Contributing
+### **Frontend (.env)**
+```env
+REACT_APP_API_URL=https://your-backend-url.com/api/v1
+REACT_APP_ENVIRONMENT=production
+```
+
+## 📁 **Project Structure**
+
+```
+mini-pm/
+├── backend/                 # .NET 8 Web API
+│   ├── Controllers/         # API Controllers
+│   ├── Models/             # Database Models
+│   ├── DTOs/               # Data Transfer Objects
+│   ├── Services/           # Business Logic
+│   ├── Helpers/            # Utility Classes
+│   ├── Program.cs          # Application Entry Point
+│   └── backend.csproj      # Project File
+├── frontend/               # React Application
+│   ├── public/             # Static Assets
+│   ├── src/
+│   │   ├── components/     # React Components
+│   │   ├── contexts/       # Context Providers
+│   │   ├── services/       # API Services
+│   │   ├── types/          # TypeScript Types
+│   │   └── App.tsx         # Main App Component
+│   └── package.json        # Dependencies
+├── docs/                   # Documentation
+├── scripts/                # Deployment Scripts
+└── README.md              # This File
+```
+
+## 🧪 **Smart Scheduler Example**
+
+```typescript
+// Example API call for Smart Scheduler
+const scheduleRequest = {
+  tasks: [
+    {
+      id: 1,
+      title: "Design Database",
+      duration: 2,
+      dependencies: []
+    },
+    {
+      id: 2,
+      title: "Implement API",
+      duration: 5,
+      dependencies: [1]
+    },
+    {
+      id: 3,
+      title: "Create Frontend",
+      duration: 3,
+      dependencies: [2]
+    }
+  ],
+  startDate: "2024-01-01",
+  workingHoursPerDay: 8
+};
+
+const response = await schedulerApi.generateSchedule(projectId, scheduleRequest);
+```
+
+## 🛠️ **Development**
+
+### **Backend Development**
+```bash
+cd backend
+dotnet watch run  # Hot reload development
+dotnet test       # Run tests
+dotnet build      # Build project
+```
+
+### **Frontend Development**
+```bash
+cd frontend
+npm start         # Development server
+npm test          # Run tests
+npm run build     # Production build
+```
+
+## 📊 **Performance**
+
+- **Backend**: Optimized with .NET 8 performance improvements
+- **Database**: SQLite for fast local development
+- **Frontend**: React 18 with concurrent features
+- **API**: RESTful design with efficient data transfer
+
+## 🔒 **Security**
+
+- JWT token authentication
+- Password hashing with BCrypt
+- CORS configuration
+- Input validation and sanitization
+- SQL injection protection with Entity Framework
+
+## 🤝 **Contributing**
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -245,21 +272,34 @@ REACT_APP_API_URL=https://your-api-domain.com
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
+## 📄 **License**
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## 🆘 **Support**
 
-- **ASP.NET Core** - Microsoft's web framework
-- **React** - Facebook's UI library
-- **Entity Framework** - Microsoft's ORM
-- **Topological Sorting** - Graph theory algorithm
+- **Documentation**: Check the `/docs` folder
+- **Issues**: [GitHub Issues](https://github.com/yourusername/mini-pm/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/yourusername/mini-pm/discussions)
 
-## 📞 Support
+## 🎯 **Roadmap**
 
-For support, email support@minipm.com or create an issue in the repository.
+- [ ] Real-time collaboration
+- [ ] File attachments for tasks
+- [ ] Advanced reporting and analytics
+- [ ] Mobile app (React Native)
+- [ ] Integration with external tools (Slack, GitHub)
+- [ ] Advanced AI features for project optimization
+
+## 🙏 **Acknowledgments**
+
+- Built with [.NET 8](https://dotnet.microsoft.com/)
+- Frontend powered by [React](https://reactjs.org/)
+- Database by [SQLite](https://www.sqlite.org/)
+- Deployment on [Render](https://render.com/) and [Vercel](https://vercel.com/)
 
 ---
 
-**Built with ❤️ using modern web technologies**
+**Made with ❤️ by [Your Name]**
+
+*Star ⭐ this repository if you found it helpful!*
