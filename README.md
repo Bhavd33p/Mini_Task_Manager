@@ -1,213 +1,196 @@
 # 🚀 Mini Project Manager
 
-A full-stack project management application built with **.NET 8** backend and **React** frontend, featuring AI-powered Smart Scheduler, user authentication, and modern black & white UI.
-
-![.NET](https://img.shields.io/badge/.NET-8.0-purple) ![React](https://img.shields.io/badge/React-18.2.0-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-4.9.5-blue) ![SQLite](https://img.shields.io/badge/SQLite-3.0-lightblue) ![License](https://img.shields.io/badge/License-MIT-green)
+A modern, full-stack project management application with intelligent task scheduling capabilities. Built with ASP.NET Core Web API backend and React TypeScript frontend.
 
 ## ✨ Features
 
-### 🔐 Authentication & Security
-- User registration and login
-- JWT token-based authentication
-- Password hashing with BCrypt
-- Protected routes and API endpoints
+### 🔐 Authentication & User Management
+- **Secure JWT Authentication** - Token-based authentication with secure password hashing
+- **User Registration & Login** - Complete user management system
+- **Protected Routes** - Secure access to authenticated features
 
 ### 📋 Project Management
-- Create, edit, and delete projects
-- Project ownership and permissions
-- Project descriptions and metadata
-- Real-time project updates
+- **Create & Manage Projects** - Organize your work into projects
+- **Project Details** - View project information and associated tasks
+- **Delete Projects** - Remove projects when no longer needed
 
 ### ✅ Task Management
-- Create and manage tasks within projects
-- Mark tasks as complete/incomplete
-- Task due dates and descriptions
-- Task dependencies and relationships
+- **Create Tasks** - Add tasks to projects with titles and due dates
+- **Mark Complete** - Toggle task completion status
+- **Delete Tasks** - Remove tasks from projects
+- **Due Date Tracking** - Visual indicators for overdue tasks
 
 ### 🧠 Smart Scheduler (AI-Powered)
-- AI-powered task scheduling algorithm
-- Dependency resolution using topological sorting
-- Optimal timeline generation
-- Resource allocation optimization
-- Conflict detection and resolution
+- **Dependency Management** - Define task dependencies and estimated hours
+- **Topological Sorting** - Automatically calculates optimal task execution order
+- **Workflow Optimization** - Minimizes project completion time
+- **Visual Task Flow** - Clear step-by-step execution plan
 
 ### 🎨 Modern UI/UX
-- Responsive black & white theme
-- Mobile-friendly design
-- Loading indicators and user feedback
-- Intuitive navigation and interactions
+- **Black & White Theme** - Clean, professional monochrome design
+- **Responsive Design** - Works perfectly on desktop, tablet, and mobile
+- **Glass Morphism Effects** - Modern UI with backdrop blur effects
+- **Smooth Animations** - Engaging micro-interactions and transitions
+- **Loading States** - Beautiful loading spinners and feedback
+- **Accessibility** - WCAG compliant with proper focus management
 
 ## 🏗️ Architecture
 
-### Backend (.NET 8)
-- **Framework:** ASP.NET Core Web API
-- **Database:** SQLite with Entity Framework Core
-- **Authentication:** JWT Bearer tokens
-- **API:** RESTful endpoints with Swagger documentation
-- **Algorithm:** Topological sorting for Smart Scheduler
+### Backend (ASP.NET Core Web API)
+```
+backend/
+├── Controllers/          # API Controllers
+├── Models/              # Entity Framework Models
+├── DTOs/                # Data Transfer Objects
+├── Services/            # Business Logic Services
+├── Helpers/             # Utility Classes
+└── Program.cs           # Application Entry Point
+```
 
-### Frontend (React)
-- **Framework:** React 18 with TypeScript
-- **State Management:** Context API
-- **HTTP Client:** Axios
-- **Routing:** React Router
-- **Styling:** Custom CSS with responsive design
+**Key Technologies:**
+- **.NET 7** - Modern C# framework
+- **Entity Framework Core** - ORM for database operations
+- **SQLite** - Lightweight database
+- **JWT Authentication** - Secure token-based auth
+- **BCrypt** - Password hashing
+- **Topological Sorting** - Smart scheduling algorithm
+
+### Frontend (React TypeScript)
+```
+frontend/
+├── src/
+│   ├── components/      # React Components
+│   ├── contexts/        # React Context (Auth)
+│   ├── services/        # API Service Layer
+│   ├── types/           # TypeScript Interfaces
+│   └── App.tsx          # Main Application
+└── public/              # Static Assets
+```
+
+**Key Technologies:**
+- **React 18** - Modern React with hooks
+- **TypeScript** - Type-safe JavaScript
+- **React Router** - Client-side routing
+- **Axios** - HTTP client for API calls
+- **Context API** - State management
+- **Custom CSS** - Modern styling with animations
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
-- [Node.js 18+](https://nodejs.org/)
-- [Git](https://git-scm.com/)
+- **.NET 7 SDK** - [Download here](https://dotnet.microsoft.com/download/dotnet/7.0)
+- **Node.js 16+** - [Download here](https://nodejs.org/)
+- **npm** - Comes with Node.js
 
-### Local Development
+### Installation
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/mini-pm.git
+   git clone <repository-url>
    cd mini-pm
-Start Backend
+   ```
 
-# Use the startup script (recommended)
-./start-backend-dotnet8.sh
+2. **Backend Setup**
+   ```bash
+   cd backend
+   dotnet restore
+   dotnet run
+   ```
+   Backend will be available at: `http://localhost:5127`
 
-# Or manually
-export PATH="/opt/homebrew/opt/dotnet@8/bin:$PATH"
-export DOTNET_ROOT="/opt/homebrew/opt/dotnet@8/libexec"
-cd backend && dotnet run
+3. **Frontend Setup**
+   ```bash
+   cd frontend
+   npm install
+   npm start
+   ```
+   Frontend will be available at: `http://localhost:3000`
 
+### Using the Application
 
-Start Frontend
+1. **Register** a new account or **Login** with existing credentials
+2. **Create Projects** to organize your work
+3. **Add Tasks** to projects with due dates
+4. **Use Smart Scheduler** to optimize task execution order
+5. **Track Progress** by marking tasks as complete
 
-cd frontend
-npm install
-npm start
+## 🔧 API Endpoints
 
+### Authentication
+- `POST /api/v1/auth/register` - User registration
+- `POST /api/v1/auth/login` - User login
 
-Access the Application
+### Projects
+- `GET /api/v1/projects` - Get user's projects
+- `POST /api/v1/projects` - Create new project
+- `GET /api/v1/projects/{id}` - Get project details
+- `DELETE /api/v1/projects/{id}` - Delete project
 
-Frontend: http://localhost:3000
+### Tasks
+- `POST /api/v1/projects/{projectId}/tasks` - Create task
+- `PUT /api/v1/tasks/{id}` - Update task
+- `DELETE /api/v1/tasks/{id}` - Delete task
 
-Backend API: http://localhost:5127
+### Smart Scheduler
+- `POST /api/v1/projects/{projectId}/schedule` - Generate optimized schedule
 
-API Documentation: http://localhost:5127/swagger
+## 🧠 Smart Scheduler Algorithm
 
-📚 API Documentation
-Authentication Endpoints
+The Smart Scheduler uses **Topological Sorting (Kahn's Algorithm)** to:
 
-POST /api/v1/auth/register - User registration
+1. **Analyze Dependencies** - Maps task relationships
+2. **Calculate Critical Path** - Identifies longest dependency chain
+3. **Optimize Order** - Minimizes total project completion time
+4. **Handle Cycles** - Detects and reports circular dependencies
+5. **Generate Schedule** - Provides step-by-step execution plan
 
-POST /api/v1/auth/login - User login
-
-Project Endpoints
-
-GET /api/v1/projects - Get user's projects
-
-POST /api/v1/projects - Create new project
-
-GET /api/v1/projects/{id} - Get project details
-
-PUT /api/v1/projects/{id} - Update project
-
-DELETE /api/v1/projects/{id} - Delete project
-
-Task Endpoints
-
-GET /api/v1/projects/{id}/tasks - Get project tasks
-
-POST /api/v1/projects/{id}/tasks - Create new task
-
-PUT /api/v1/tasks/{id} - Update task
-
-DELETE /api/v1/tasks/{id} - Delete task
-
-Smart Scheduler Endpoint
-
-POST /api/v1/projects/{id}/schedule - Generate optimal schedule
-
-📁 Project Structure
-mini-pm/
-├── backend/                 # .NET 8 Web API
-│   ├── Controllers/         # API Controllers
-│   ├── Models/              # Database Models
-│   ├── DTOs/                # Data Transfer Objects
-│   ├── Services/            # Business Logic
-│   ├── Helpers/             # Utility Classes
-│   ├── Program.cs           # Application Entry Point
-│   └── backend.csproj       # Project File
-├── frontend/                # React Application
-│   ├── public/              # Static Assets
-│   ├── src/
-│   │   ├── components/      # React Components
-│   │   ├── contexts/        # Context Providers
-│   │   ├── services/        # API Services
-│   │   ├── types/           # TypeScript Types
-│   │   └── App.tsx          # Main App Component
-│   └── package.json         # Dependencies
-├── docs/                    # Documentation
-├── scripts/                 # Deployment Scripts
-└── README.md                # This File
-
-🧪 Smart Scheduler Example
-// Example API call for Smart Scheduler
-const scheduleRequest = {
-  tasks: [
+### Example Usage
+```json
+{
+  "tasks": [
     {
-      id: 1,
-      title: "Design Database",
-      duration: 2,
-      dependencies: []
+      "title": "Design Database",
+      "estimatedHours": 4,
+      "dependencies": []
     },
     {
-      id: 2,
-      title: "Implement API",
-      duration: 5,
-      dependencies: [1]
+      "title": "Create API",
+      "estimatedHours": 8,
+      "dependencies": ["Design Database"]
     },
     {
-      id: 3,
-      title: "Create Frontend",
-      duration: 3,
-      dependencies: [2]
+      "title": "Build Frontend",
+      "estimatedHours": 12,
+      "dependencies": ["Create API"]
     }
-  ],
-  startDate: "2024-01-01",
-  workingHoursPerDay: 8
-};
+  ]
+}
+```
 
-const response = await schedulerApi.generateSchedule(projectId, scheduleRequest);
+## 🎨 UI/UX Features
 
-🛠️ Development
-Backend Development
-cd backend
-dotnet watch run  # Hot reload development
-dotnet test       # Run tests
-dotnet build      # Build project
+### Design System
+- **Monochrome Palette** - Black, white, and gray tones
+- **Typography** - System fonts with proper hierarchy
+- **Spacing** - Consistent 8px grid system
+- **Shadows** - Subtle depth and elevation
+- **Borders** - Clean, minimal borders
 
-Frontend Development
-cd frontend
-npm start         # Development server
-npm test          # Run tests
-npm run build     # Production build
+### Responsive Breakpoints
+- **Mobile**: < 640px
+- **Tablet**: 640px - 1024px
+- **Desktop**: > 1024px
 
-📊 Performance
+### Interactive Elements
+- **Hover Effects** - Smooth color transitions
+- **Focus States** - Accessibility-compliant focus indicators
+- **Loading States** - Spinner animations
+- **Form Validation** - Real-time error feedback
 
-Backend: Optimized with .NET 8 performance improvements
+## 🔒 Security Features
 
-Database: SQLite for fast local development
-
-Frontend: React 18 with concurrent features
-
-API: RESTful design with efficient data transfer
-
-🔒 Security
-
-JWT token authentication
-
-Password hashing with BCrypt
-
-CORS configuration
-
-Input validation and sanitization
-
-SQL injection protection with Entity Framework
+- **JWT Tokens** - Secure authentication
+- **Password Hashing** - BCrypt encryption
+- **CORS Configuration** - Cross-origin request handling
+- **Input Validation** - Server-side validation
+- **SQL Injection Protection** - Entity Framework parameterized queries
